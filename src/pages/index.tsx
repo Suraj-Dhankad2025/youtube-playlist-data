@@ -193,7 +193,7 @@ export default function Home() {
                       className="p-4 border rounded-lg hover:border-primary/50 transition-all hover:shadow-md"
                     >
                       <h3 className="font-medium text-foreground">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                      {/* <p className="text-sm text-muted-foreground">{item.description}</p> */}
                       {item.thumbnails?.default && (
                         <img
                           src={item.thumbnails.default.url}
