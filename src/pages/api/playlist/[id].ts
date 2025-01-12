@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import { supabase } from '../../../lib/supabase';
+// import { supabase } from '../../../lib/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession({ req });
@@ -38,21 +38,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Store playlist items in Supabase
     
     
-    for (const item of items) {
-      await supabase
-        .from('playlist_items')
-        .upsert({
-          id: item.id,
-          playlist_id: id,
-          video_id: item.videoId,
-          title: item.title,
-          description: item.description,
-          thumbnail_url: item.thumbnails?.default?.url,
-          position: item.position
-        }, {
-          onConflict: 'id'
-        });
-    }
+    // for (const item of items) {
+    //   await supabase
+    //     .from('playlist_items')
+    //     .upsert({
+    //       id: item.id,
+    //       playlist_id: id,
+    //       video_id: item.videoId,
+    //       title: item.title,
+    //       description: item.description,
+    //       thumbnail_url: item.thumbnails?.default?.url,
+    //       position: item.position
+    //     }, {
+    //       onConflict: 'id'
+    //     });
+    // }
 
     res.status(200).json(items);
   } catch (error) {
