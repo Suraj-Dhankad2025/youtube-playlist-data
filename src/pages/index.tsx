@@ -52,6 +52,7 @@ export default function Home() {
       if (!response.ok) throw new Error('Failed to fetch channel playlists');
       const data = await response.json();
       setPlaylists(data);
+      // console.log(playlists);
       setIsSearching(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

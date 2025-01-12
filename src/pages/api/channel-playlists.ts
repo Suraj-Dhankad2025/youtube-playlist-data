@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { channelId } = req.query;
-
   if (!channelId) {
     return res.status(400).json({ error: 'Channel ID is required' });
   }
@@ -13,7 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const youtube = google.youtube('v3');
-  
   try {
     const response = await youtube.playlists.list({
       key: process.env.YOUTUBE_API_KEY,
@@ -21,7 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       channelId: channelId as string,
       maxResults: 50
     });
-
     if (!response.data.items) {
       return res.status(200).json([]);
     }
@@ -35,10 +32,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       privacyStatus: item.status?.privacyStatus,
       publishedAt: item.snippet?.publishedAt
     }));
-
+    console.log('playlists:', playlists);
     res.status(200).json(playlists);
   } catch (error) {
-    console.error('Error fetching channel playlists:', error);
+    // console.error('Error fetching channel playlists:', error);
     res.status(500).json({ error: 'Failed to fetch channel playlists' });
   }
 }
